@@ -31,26 +31,31 @@ int main(int argc, char* argv[])
                              "SDL_image Error: " + std::string(IMG_GetError()));
 
 
-  auto window_ptr = SDL_CreateWindow("SDL2 Window",
+  auto window = SDL_CreateWindow("SDL2 Window",
                                      SDL_WINDOWPOS_UNDEFINED,
                                      SDL_WINDOWPOS_UNDEFINED,
- 				     900, 900,SDL_WINDOW_SHOWN); //AGRANDIR LA TAILLE de L'IMAGE
+ 				     900, 900,SDL_WINDOW_RESIZABLE); //AGRANDIR LA TAILLE de L'IMAGE
  
+  
+  SDL_Surface *screen = SDL_GetWindowSurface(window);
 
-  if (!window_ptr)
-    throw std::runtime_error(std::string(SDL_GetError()));
+ 
+ // window_surface_ptr = SDL_CreateRGBSurface(0, 600,600, 32, 0, 0, 0, 0);
+  Uint32 green = SDL_MapRGB(screen->format, 0, 255, 0);
 
-  auto window_surface_ptr = SDL_GetWindowSurface(window_ptr);
-
-  if (!window_surface_ptr)
-    throw std::runtime_error(std::string(SDL_GetError()));
-
-  //auto surf = IMG_Load("../img.png");
-  //if (!surf)
-    //throw std::runtime_error("Could not load image");
-  //auto rect = SDL_Rect{255,255,194,259};
-  window_surface_ptr = SDL_CreateRGBSurface(0, 600,600, 32, 0, 0, 0, 0);
-  SDL_FillRect(window_surface_ptr, NULL, SDL_MapRGB(window_surface_ptr->format, 0, 0, 0));
+  SDL_FillRect(screen, NULL,green);
+  SDL_UpdateWindowSurface(window);
+  SDL_Event event;
+  bool run = true;
+  while(run){
+	  while(SDL_PollEvent(&event)){
+			  if(event.type == SDL_QUIT)
+			  {
+			  	run = false;
+				break;
+			  }
+	}
+}
   
   
   //if (SDL_BlitSurface(surf, NULL, window_surface_ptr, &rect))
@@ -58,8 +63,7 @@ int main(int argc, char* argv[])
 
 
 
-  SDL_UpdateWindowSurface(window_ptr);
-
+/* 
   auto start = SDL_GetTicks();
 
   SDL_Event e;
@@ -72,6 +76,6 @@ int main(int argc, char* argv[])
           }
       }
   }
-
+*/
   return 0;
 }
