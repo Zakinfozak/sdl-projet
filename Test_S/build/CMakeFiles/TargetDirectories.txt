@@ -1,0 +1,5 @@
+/home/zak/sdl-projet/Test_S/build/CMakeFiles/edit_cache.dir
+/home/zak/sdl-projet/Test_S/build/CMakeFiles/rebuild_cache.dir
+/home/zak/sdl-projet/Test_S/build/SDL_Test/CMakeFiles/SDLTest.dir
+/home/zak/sdl-projet/Test_S/build/SDL_Test/CMakeFiles/edit_cache.dir
+/home/zak/sdl-projet/Test_S/build/SDL_Test/CMakeFiles/rebuild_cache.dir

@@ -32,10 +32,10 @@ int main(int argc, char* argv[])
 
 
   auto window_ptr = SDL_CreateWindow("SDL2 Window",
-                                     SDL_WINDOWPOS_CENTERED,
-                                     SDL_WINDOWPOS_CENTERED,
-                                     194, 259,
-                                     0);
+                                     SDL_WINDOWPOS_UNDEFINED,
+                                     SDL_WINDOWPOS_UNDEFINED,
+ 				     900, 900,SDL_WINDOW_SHOWN); //AGRANDIR LA TAILLE de L'IMAGE
+ 
 
   if (!window_ptr)
     throw std::runtime_error(std::string(SDL_GetError()));
@@ -45,12 +45,17 @@ int main(int argc, char* argv[])
   if (!window_surface_ptr)
     throw std::runtime_error(std::string(SDL_GetError()));
 
-  auto surf = IMG_Load("../img.png");
-  if (!surf)
-    throw std::runtime_error("Could not load image");
-  auto rect = SDL_Rect{0,0,194,259};
-  if (SDL_BlitSurface(surf, NULL, window_surface_ptr, &rect))
-      throw std::runtime_error("Could not apply texture.");
+  //auto surf = IMG_Load("../img.png");
+  //if (!surf)
+    //throw std::runtime_error("Could not load image");
+  //auto rect = SDL_Rect{255,255,194,259};
+  window_surface_ptr = SDL_CreateRGBSurface(0, 600,600, 32, 0, 0, 0, 0);
+  SDL_FillRect(window_surface_ptr, NULL, SDL_MapRGB(window_surface_ptr->format, 0, 0, 0));
+  
+  
+  //if (SDL_BlitSurface(surf, NULL, window_surface_ptr, &rect))
+    //  throw std::runtime_error("Could not apply texture.");
+
 
 
   SDL_UpdateWindowSurface(window_ptr);
